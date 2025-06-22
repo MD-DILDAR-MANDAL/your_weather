@@ -58,6 +58,7 @@ class _DetailPageState extends State<DetailPage> {
       appBar: AppBar(
         title: const Text('Forecasts'),
         centerTitle: true,
+        foregroundColor: Colors.white,
         backgroundColor: _constants.primaryColor,
         elevation: 0.0,
         actions: [
@@ -204,10 +205,9 @@ class _DetailPageState extends State<DetailPage> {
                             top: 320,
                             left: 0,
                             child: SizedBox(
-                              height: 400,
+                              height: 300,
                               width: size.width * .9,
                               child: ListView(
-                                physics: const BouncingScrollPhysics(),
                                 children: [
                                   Card(
                                     elevation: 3.0,
