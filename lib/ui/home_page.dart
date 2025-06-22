@@ -117,7 +117,7 @@ class _HomePageState extends State<HomePage> {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       backgroundColor: Colors.white,
       body: Container(
         width: size.width,
@@ -168,70 +168,74 @@ class _HomePageState extends State<HomePage> {
                               _cityController.clear();
                               showMaterialModalBottomSheet(
                                 context: context,
-                                builder:
-                                    (context) => SingleChildScrollView(
-                                      controller: ModalScrollController.of(
-                                        context,
+                                builder: (context) {
+                                  final keyboardSpace =
+                                      MediaQuery.of(context).viewInsets.bottom;
+                                  return SingleChildScrollView(
+                                    controller: ModalScrollController.of(
+                                      context,
+                                    ),
+                                    child: Container(
+                                      height: size.height * .2 + keyboardSpace,
+                                      padding: EdgeInsets.only(
+                                        left: 20,
+                                        right: 20,
+                                        top: 10,
+                                        bottom: keyboardSpace + 10,
                                       ),
-                                      child: Container(
-                                        height: size.height * .2,
-                                        padding: const EdgeInsets.symmetric(
-                                          horizontal: 20,
-                                          vertical: 10,
-                                        ),
-                                        child: Column(
-                                          children: [
-                                            SizedBox(
-                                              width: 70,
-                                              child: Divider(
-                                                thickness: 3.5,
+                                      child: Column(
+                                        children: [
+                                          SizedBox(
+                                            width: 70,
+                                            child: Divider(
+                                              thickness: 3.5,
+                                              color: _constants.primaryColor,
+                                            ),
+                                          ),
+                                          const SizedBox(height: 10),
+                                          TextField(
+                                            onChanged: (searchText) {
+                                              fetchWeatherData(searchText);
+                                            },
+                                            controller: _cityController,
+                                            autofocus: true,
+                                            textInputAction: TextInputAction.done,
+                                            onSubmitted: (_){
+                                              FocusScope.of(context).unfocus();
+                                              Navigator.pop(context);
+                                            },
+                                            decoration: InputDecoration(
+                                              prefixIcon: Icon(
+                                                Icons.search,
                                                 color: _constants.primaryColor,
                                               ),
-                                            ),
-                                            const SizedBox(height: 10),
-                                            TextField(
-                                              onChanged: (searchText) {
-                                                fetchWeatherData(searchText);
-                                              },
-                                              controller: _cityController,
-                                              autofocus: true,
-                                              decoration: InputDecoration(
-                                                prefixIcon: Icon(
-                                                  Icons.search,
+                                              suffixIcon: GestureDetector(
+                                                onTap:
+                                                    () =>
+                                                        _cityController.clear(),
+                                                child: Icon(
+                                                  Icons.close,
                                                   color:
                                                       _constants.primaryColor,
                                                 ),
-                                                suffixIcon: GestureDetector(
-                                                  onTap:
-                                                      () =>
-                                                          _cityController
-                                                              .clear(),
-                                                  child: Icon(
-                                                    Icons.close,
-                                                    color:
-                                                        _constants.primaryColor,
-                                                  ),
+                                              ),
+                                              hintText:
+                                                  'Search city e.g. London',
+                                              focusedBorder: OutlineInputBorder(
+                                                borderSide: BorderSide(
+                                                  color:
+                                                      _constants.primaryColor,
                                                 ),
-                                                hintText:
-                                                    'Search city e.g. London',
-                                                focusedBorder:
-                                                    OutlineInputBorder(
-                                                      borderSide: BorderSide(
-                                                        color:
-                                                            _constants
-                                                                .primaryColor,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                            10,
-                                                          ),
-                                                    ),
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
                                               ),
                                             ),
-                                          ],
-                                        ),
+                                          ),
+                                        ],
                                       ),
                                     ),
+                                  );
+                                },
                               );
                             },
                             icon: const Icon(
