@@ -122,6 +122,9 @@ class _DetailPageState extends State<DetailPage> {
                           Positioned(
                             child: Image.asset(
                               "assets/" + getForecastWeather(0)["weatherIcon"],
+                              errorBuilder: (context, error, StackTrace) {
+                                return Container();
+                              },
                             ),
                             width: 150,
                           ),
@@ -347,6 +350,13 @@ class _DetailPageState extends State<DetailPage> {
                                                           0,
                                                         )["weatherIcon"],
                                                     width: 30,
+                                                    errorBuilder: (
+                                                      context,
+                                                      error,
+                                                      StackTrace,
+                                                    ) {
+                                                      return Container();
+                                                    },
                                                   ),
                                                   const SizedBox(width: 5),
                                                   Text(
@@ -526,6 +536,13 @@ class _DetailPageState extends State<DetailPage> {
                                                           1,
                                                         )["weatherIcon"],
                                                     width: 30,
+                                                    errorBuilder: (
+                                                      context,
+                                                      error,
+                                                      StackTrace,
+                                                    ) {
+                                                      return Container();
+                                                    },
                                                   ),
                                                   const SizedBox(width: 5),
                                                   Text(
@@ -705,6 +722,13 @@ class _DetailPageState extends State<DetailPage> {
                                                           2,
                                                         )["weatherIcon"],
                                                     width: 30,
+                                                    errorBuilder: (
+                                                      context,
+                                                      error,
+                                                      StackTrace,
+                                                    ) {
+                                                      return Container();
+                                                    },
                                                   ),
                                                   const SizedBox(width: 5),
                                                   Text(

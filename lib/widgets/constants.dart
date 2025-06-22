@@ -15,7 +15,7 @@ class Constants {
   final linearGradientBlue = const LinearGradient(
     begin: Alignment.topRight,
     end: Alignment.topLeft,
-    colors: [Color(0xffABcff2), Color.fromARGB(255, 101, 156, 211)],
+    colors: [Color.fromARGB(255, 148, 192, 236), Color.fromARGB(255, 82, 120, 209)],
     stops: [0.0, 1.0],
   );
 

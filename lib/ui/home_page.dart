@@ -71,6 +71,7 @@ class _HomePageState extends State<HomePage> {
         currentWeatherStatus = currentWeather["condition"]["text"];
         weatherIcon =
             currentWeatherStatus.replaceAll(' ', '').toLowerCase() + ".png";
+
         temperature = currentWeather["temp_c"].toInt();
         windSpeed = currentWeather["wind_kph"].toInt();
         humidity = currentWeather["humidity"].toInt();
@@ -273,7 +274,12 @@ class _HomePageState extends State<HomePage> {
                     ),
                     SizedBox(
                       height: 160,
-                      child: Image.asset("assets/" + weatherIcon),
+                      child: Image.asset(
+                        "assets/" + weatherIcon,
+                        errorBuilder: (context, error, StackTrace) {
+                          return Container();
+                        },
+                      ),
                     ),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -452,6 +458,9 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 Image.asset(
                                   'assets/' + forecastWeatherIcon,
+                                  errorBuilder: (context, error, StackTrace) {
+                                    return Container();
+                                  },
                                   width: 20,
                                 ),
                                 Row(
